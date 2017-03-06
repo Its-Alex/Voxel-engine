@@ -17,6 +17,8 @@ bool 		SceneGl::Loop()
 {
 	mWindow.init();
 
+	glClearColor(0.0f, 0.4f, 0.0f, 0.0f);
+
 	glGenVertexArrays(1, &mVertexArrayID);
 	glBindVertexArray(mVertexArrayID);
 
