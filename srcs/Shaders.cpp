@@ -2,7 +2,7 @@
 
 using namespace glm;
 
-Shaders::Shaders(std::string vertexFilePath, std::string fragmentFilePath) :
+        Shaders::Shaders(std::string vertexFilePath, std::string fragmentFilePath) :
 	mVertexPath(vertexFilePath), mFragmentPath(fragmentFilePath)
 {
     // Crée les shaders
@@ -10,11 +10,11 @@ Shaders::Shaders(std::string vertexFilePath, std::string fragmentFilePath) :
     mFragmentShaderID = glCreateShader(GL_FRAGMENT_SHADER);
 }
 
-Shaders::~Shaders()
+        Shaders::~Shaders()
 {
 }
 
-GLuint Shaders::Load()
+GLuint  Shaders::Load()
 {
     // Lit le code du vertex shader à partir du fichier
     std::string VertexShaderCode;

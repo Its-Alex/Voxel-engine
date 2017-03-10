@@ -1,6 +1,6 @@
 #include "SceneGl.hpp"
 
-int main(void)
+int		main(void)
 {
 	SceneGl		Scene("Opengl", 500, 500);
 
