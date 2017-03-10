@@ -11,6 +11,7 @@
 //  Include OpenGL
 # include <GL/glew.h>
 # include <glm/glm.hpp>
+# include <glm/gtx/transform.hpp>
 
 # include "Shaders.hpp"
 # include "Window.hpp"
