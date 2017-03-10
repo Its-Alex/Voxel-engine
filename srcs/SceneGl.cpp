@@ -5,19 +5,23 @@ using namespace glm;
 			SceneGl::SceneGl(std::string title, int width, int height) :
 			mWindow(title, width, height)
 {
+	if (!mWindow.init())
+		exit(-1);
 }
 			SceneGl::~SceneGl()
 {
 	glDeleteBuffers(1, &mVertexBuffer);
 	glDeleteVertexArrays(1, &mVertexArrayID);
-	glDeleteProgram(mWindow.getProgramID());
+	glDeleteProgram(mProgramID);
 }
 
 bool 		SceneGl::Loop()
 {
-	mWindow.init();
+	glClearColor(0.0f, 1.0f, 0.5f, 0.0f);
 
-	glClearColor(0.0f, 0.4f, 0.0f, 0.0f);
+	// Create and compile our GLSL program from the shaders
+	Shaders Shaders("../assets/SimpleVertexShader.vertexshader", "../assets/SimpleFragmentShader.fragmentshader");
+	mProgramID = Shaders.Load();
 
 	glGenVertexArrays(1, &mVertexArrayID);
 	glBindVertexArray(mVertexArrayID);
@@ -32,12 +36,12 @@ bool 		SceneGl::Loop()
 	glBindBuffer(GL_ARRAY_BUFFER, mVertexBuffer);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(g_vertex_buffer_data), g_vertex_buffer_data, GL_STATIC_DRAW);
 
-	do{
+	do {
 		// Clear the screen
 		glClear( GL_COLOR_BUFFER_BIT );
 
 		// Use our shader
-		glUseProgram(mWindow.getProgramID());
+		glUseProgram(mProgramID);
 
 		// 1rst attribute buffer : vertices
 		glEnableVertexAttribArray(0);
@@ -57,7 +61,6 @@ bool 		SceneGl::Loop()
 		glDisableVertexAttribArray(0);
 
 		mWindow.update();
-	} // Check if the ESC key was pressed or the mWindow was closed
-	while(mWindow.isDone());
+	} while(mWindow.isDone());
 	return (true);
 }

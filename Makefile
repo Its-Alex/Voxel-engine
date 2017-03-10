@@ -6,19 +6,21 @@
 #    By: alex <alex@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/08/21 18:23:32 by malexand          #+#    #+#              #
-#    Updated: 2017/03/06 23:35:53 by alex             ###   ########.fr        #
+#    Updated: 2017/03/10 18:39:07 by alex             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 EXEC = opengl
 
-export DEBUG = no
+export DEBUG = yes
 CC = g++
 OS := $(shell uname -s)
 MAKEFLAGS += --silent
 
+# Debug flags : -g -ggdb -fsanitize=address
+
 ifeq ($(DEBUG), yes)
-	CFLAGS = -Wall -Werror -Wextra -fsanitize=address -g -ggdb
+	CFLAGS = -Wall -Werror -Wextra  -g -ggdb
 else
 	CFLAGS = -Wall -Werror -Wextra -O3 -D_REENTRANT
 endif
@@ -38,7 +40,7 @@ SRC_DIR = srcs
 INC_DIR = incs
 
 SDIR =		./srcs/
-SRCS =		main.cpp Shaders.cpp SceneGl.cpp glfw.cpp
+SRCS =		$(shell ls srcs)
 SRCC =		$(addprefix $(SDIR),$(SRCS))
 
 ODIR =		./objs/

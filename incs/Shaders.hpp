@@ -10,8 +10,6 @@
 
 //  Include OpenGL
 # include <GL/glew.h>
-
-# include <GLFW/glfw3.h>
 # include <glm/glm.hpp>
 
 class Shaders
@@ -25,6 +23,9 @@ class Shaders
 	private:
 		std::string mVertexPath;
 		std::string mFragmentPath;
+
+		GLuint		mVertexShaderID;
+		GLuint		mFragmentShaderID;
 };
 
 #endif

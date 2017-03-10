@@ -10,12 +10,10 @@
 
 //  Include OpenGL
 # include <GL/glew.h>
-
-# include <GLFW/glfw3.h>
 # include <glm/glm.hpp>
 
 # include "Shaders.hpp"
-# include "glfw.hpp"
+# include "Window.hpp"
 
 class SceneGl
 {
@@ -26,7 +24,7 @@ class SceneGl
 		bool	Loop();
 
 	private:
-		Glfw			mWindow;
+		Window			mWindow;
 		std::string 	mTitle;
 		int				mWidth;
 		int				mHeight;

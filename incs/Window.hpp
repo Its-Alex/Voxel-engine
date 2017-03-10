@@ -1,5 +1,5 @@
-#ifndef GLFW_HPP
-# define GLFW_HPP
+#ifndef Window_HPP
+# define Window_HPP
 
 # include <stdio.h>
 # include <stdlib.h>
@@ -10,17 +10,13 @@
 
 //  Include OpenGL
 # include <GL/glew.h>
-
 # include <GLFW/glfw3.h>
-# include <glm/glm.hpp>
 
-# include "Shaders.hpp"
-
-class Glfw
+class Window
 {
 	public:
-		Glfw(std::string title, int width, int height);
-		~Glfw();
+		Window(std::string title, int width, int height);
+		~Window();
 
 		bool	init();
 		bool	isDone();
@@ -29,7 +25,7 @@ class Glfw
 		
 	private:
 		GLFWwindow		*mWindow;
-		GLuint			mProgramID;
+
 		std::string 	mTitle;
 		int				mWidth;
 		int				mHeight;
