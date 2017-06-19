@@ -6,7 +6,7 @@ static void	GlfwError(int code, const char *error)
 }
 
 			Window::Window(std::string title, int width, int height) : mTitle(title),
-	mWidth(width), mHeight(height)
+			mWidth(width), mHeight(height)
 {}
 
 			Window::~Window()
