@@ -13,8 +13,9 @@
 # include <glm/glm.hpp>
 # include <glm/gtx/transform.hpp>
 
-# include "Shaders.class.hpp"
 # include "Window.class.hpp"
+# include "Shaders.class.hpp"
+# include "Input.class.hpp"
 
 class Scene
 {
