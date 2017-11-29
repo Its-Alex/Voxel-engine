@@ -1,8 +1,8 @@
-#include "SceneGl.hpp"
+#include "Scene.class.hpp"
 
 int		main(void)
 {
-	SceneGl		Scene("Opengl", 500, 500);
+	Scene	Scene("Opengl", 500, 500);
 
 	Scene.Loop();
 	return (0);

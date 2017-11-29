@@ -1,4 +1,4 @@
-#include "Shaders.hpp"
+#include "Shaders.class.hpp"
 
 using namespace glm;
 

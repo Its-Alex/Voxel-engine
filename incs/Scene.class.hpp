@@ -1,5 +1,5 @@
-#ifndef SCENEGL_HPP
-# define SCENEGL_HPP
+#ifndef SCENE_CLASS_HPP
+# define SCENE_CLASS_HPP
 
 # include <stdio.h>
 # include <stdlib.h>
@@ -13,14 +13,14 @@
 # include <glm/glm.hpp>
 # include <glm/gtx/transform.hpp>
 
-# include "Shaders.hpp"
-# include "Window.hpp"
+# include "Shaders.class.hpp"
+# include "Window.class.hpp"
 
-class SceneGl
+class Scene
 {
 	public:
-		SceneGl(std::string title, int width, int height);
-		~SceneGl();
+		Scene(std::string title, int width, int height);
+		~Scene();
 
 		bool	Loop();
 

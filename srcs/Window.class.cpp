@@ -1,15 +1,15 @@
-#include "Window.hpp"
+#include "Window.class.hpp"
 
 static void	GlfwError(int code, const char *error)
 {
-	std::cout << "Error GLFW [" << code << "]: " << error << std::endl;
+std::cout << "Error GLFW [" << code << "]: " << error << std::endl;
 }
 
-			Window::Window(std::string title, int width, int height) : mTitle(title),
-			mWidth(width), mHeight(height)
+Window::Window(std::string title, int width, int height) : mTitle(title),
+mWidth(width), mHeight(height)
 {}
 
-			Window::~Window()
+Window::~Window()
 {
 	glfwDestroyWindow(mWindow);
     glfwTerminate();

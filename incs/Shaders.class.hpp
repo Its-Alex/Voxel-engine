@@ -1,5 +1,5 @@
-#ifndef SHADERS_HPP
-# define SHADERS_HPP
+#ifndef SHADERS_CLASS_HPP
+# define SHADERS_CLASS_HPP
 
 # include <stdio.h>
 # include <stdlib.h>

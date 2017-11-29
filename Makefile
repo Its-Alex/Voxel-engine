@@ -6,7 +6,7 @@
 #    By: alex <alex@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/08/21 18:23:32 by malexand          #+#    #+#              #
-#    Updated: 2017/11/29 22:57:40 by alex             ###   ########.fr        #
+#    Updated: 2017/11/29 23:02:41 by alex             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,10 +51,7 @@ ODIR = 		./objs/
 OBJS = 		$(SRCS:.cpp=.o)
 OBCC = 		$(addprefix $(ODIR),$(OBJS))
 
-GLEW_SRC = ./lib/glew-2.1.0/src/glew.c
-
-
-$(EXEC): directories $(OBCC) lib
+$(EXEC): directories $(OBCC)
 ifeq ($(OS), Linux)
 	@echo -e "\x1B[34m$(EXEC):\x1B[0m"
 	$(CC) $(CXXFLAGS) -o $@ $(OBCC) $(INCLUDE) $(LFLAGS)

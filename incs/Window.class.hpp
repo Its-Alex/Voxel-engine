@@ -1,5 +1,5 @@
-#ifndef Window_HPP
-# define Window_HPP
+#ifndef Window_CLASS_HPP
+# define Window_CLASS_HPP
 
 # include <stdio.h>
 # include <stdlib.h>

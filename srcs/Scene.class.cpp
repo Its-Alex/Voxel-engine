@@ -1,21 +1,21 @@
-#include "SceneGl.hpp"
+#include "Scene.class.hpp"
 
 using namespace glm;
 			
-			SceneGl::SceneGl(std::string title, int width, int height) :
-			mWindow(title, width, height)
+Scene::Scene(std::string title, int width, int height) :
+mWindow(title, width, height)
 {
 	if (!mWindow.init())
 		exit(-1);
 }
-			SceneGl::~SceneGl()
+Scene::~Scene()
 {
 	glDeleteBuffers(1, &mVertexBuffer);
 	glDeleteVertexArrays(1, &mVertexArrayID);
 	glDeleteProgram(mProgramID);
 }
 
-bool 		SceneGl::Loop()
+bool 	Scene::Loop()
 {
 	glClearColor(0.0f, 0.0f, 0.4f, 0.0f);
 
