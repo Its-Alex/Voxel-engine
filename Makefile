@@ -6,7 +6,7 @@
 #    By: alex <alex@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/08/21 18:23:32 by malexand          #+#    #+#              #
-#    Updated: 2017/03/31 18:18:33 by alex             ###   ########.fr        #
+#    Updated: 2017/11/29 22:57:40 by alex             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,12 +32,11 @@ endif
 # Link lib : "-L FOLDER -lXXX" where XXX = libXXX.a
 
 ifeq ($(OS), Linux)
-	LFLAGS = 	-lGLEW -lGLU -lGL -lglfw
-	INCLUDE = 	-I./incs -I/usr/include/libdrm
+	LFLAGS = 	`pkg-config --libs glfw3` `pkg-config --libs glew`
+	INCLUDE = 	-I./incs `pkg-config --libs glfw3` `pkg-config --libs glew`
 else
-	LFLAGS = 	-L./lib/glfw-3.2.1/build/src -lglfw3 -L./lib/glew-2.0.0/lib \
-				-lGLEW -framework Cocoa -framework OpenGL -framework IOKit -framework CoreVideo
-	INCLUDE = 	-I./incs -I./lib/glew-2.0.0/include -I./lib/glfw-3.2.1/include -I./lib/glm
+	LFLAGS = 	`pkg-config --libs glfw3` `pkg-config --libs glew`
+	INCLUDE = 	-I./incs `pkg-config --libs glfw3` `pkg-config --libs glew`
 endif
 
 OUT_DIR = 	objs
@@ -52,9 +51,10 @@ ODIR = 		./objs/
 OBJS = 		$(SRCS:.cpp=.o)
 OBCC = 		$(addprefix $(ODIR),$(OBJS))
 
-all: directories $(EXEC)
+GLEW_SRC = ./lib/glew-2.1.0/src/glew.c
 
-$(EXEC): directories $(OBCC)
+
+$(EXEC): directories $(OBCC) lib
 ifeq ($(OS), Linux)
 	@echo -e "\x1B[34m$(EXEC):\x1B[0m"
 	$(CC) $(CXXFLAGS) -o $@ $(OBCC) $(INCLUDE) $(LFLAGS)
@@ -106,4 +106,4 @@ re: fclean
 run: all
 	@./$(EXEC)
 
-.PHONY: all clean fclean re run directories cleanlib
+.PHONY: all clean fclean re run directories lin
