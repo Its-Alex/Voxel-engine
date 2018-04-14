@@ -21,21 +21,21 @@ MAKEFLAGS += --silent
 
 ifeq ($(DEBUG), yes)
 	CFLAGS =
-	CXXFLAGS = 	-Wall -Werror -Wextra  -g -ggdb
+	CXXFLAGS = 	#-Wall -Werror -Wextra  -g -ggdb
 	CPPFLAGS =
 else
 	CFLAGS =
-	CXXFLAGS = 	-Wall -Werror -Wextra -Ofast -D_REENTRANT
+	CXXFLAGS = 	#-Wall -Werror -Wextra -Ofast -D_REENTRANT
 	CPPFLAGS =
 endif
 
 # Link lib : "-L FOLDER -lXXX" where XXX = libXXX.a
 
 ifeq ($(OS), Linux)
-	LFLAGS = 	`pkg-config --libs glfw3` `pkg-config --libs glew`
+	LFLAGS = 	`pkg-config --libs glfw3` `pkg-config --libs glew` -lGL -lm -lGLU
 	INCLUDE = 	-I./incs `pkg-config --libs glfw3` `pkg-config --libs glew`
 else
-	LFLAGS = 	`pkg-config --libs glfw3` `pkg-config --libs glew`
+	LFLAGS = 	`pkg-config --libs glfw3` `pkg-config --libs glew` -framework OpenGL -lm
 	INCLUDE = 	-I./incs `pkg-config --libs glfw3` `pkg-config --libs glew`
 endif
 
@@ -103,4 +103,4 @@ re: fclean
 run: all
 	@./$(EXEC)
 
-.PHONY: all clean fclean re run directories lin
+.PHONY: all clean fclean re run directories
