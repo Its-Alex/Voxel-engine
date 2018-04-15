@@ -67,15 +67,15 @@ else
 	@echo "\x1b[36m  + Compile program:\x1B[0m $@"
 endif
 
-$(ODIR)%.o: $(SDIR)%.cpp
-	$(CC) $< $(CXXFLAGS) -c -o $@ $(INCLUDE)
+$(ODIR)%.o: $(SDIR)%.c
+	$(CC) $< $(CFLAGS) -c -o $@ $(INCLUDE)
 ifeq ($(OS), Linux)
 	@echo -e "\r\x1B[32m  + Compile:\x1B[0m $(notdir $<)"
 else
 	@echo "\r\x1B[32m  + Compile:\x1B[0m $(notdir $<)"
 endif
 
-$(ODIR)%.o: $(SDIR)%.c
+$(ODIR)%.o: $(SDIR)%.cpp
 	$(CC) $< $(CXXFLAGS) -c -o $@ $(INCLUDE)
 ifeq ($(OS), Linux)
 	@echo -e "\r\x1B[32m  + Compile:\x1B[0m $(notdir $<)"
@@ -90,7 +90,7 @@ $(DEPEND_FRAGMENT): $(SRCC)
 	@mv $(DEPEND_FRAGMENT).bak $(DEPEND_FRAGMENT)
 
 clean:
-	@rm -rf $(DEPEND_FRAGMENT) $(OUT_DIR) 
+	@rm -rf $(OUT_DIR) $(DEPEND_FRAGMENT)
 ifeq ($(OS), Linux)
 	@echo -e "\x1B[31m  - Remove:\x1B[0m objs"
 else
