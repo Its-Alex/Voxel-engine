@@ -28,8 +28,8 @@ class Scene
 	private:
 		Window			mWindow;
 		std::string 	mTitle;
-		int				mWidth;
-		int				mHeight;
+		// int				mWidth;
+		// int				mHeight;
 
 		GLuint			mVertexArrayID;
 		GLuint			mVertexBuffer;

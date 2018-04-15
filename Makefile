@@ -20,11 +20,11 @@ MAKEFLAGS += --silent
 
 ifeq ($(DEBUG), yes)
 	CFLAGS =
-	CXXFLAGS = -g -ggdb `pkg-config --cflags glfw3` `pkg-config --cflags glew` #-Wall -Werror -Wextra
+	CXXFLAGS = -Wall -Werror -Wextra -g -ggdb `pkg-config --cflags glfw3` `pkg-config --cflags glew`
 	CPPFLAGS =
 else
 	CFLAGS =
-	CXXFLAGS = -Ofast -D_REENTRANT `pkg-config --cflags glfw3` `pkg-config --cflags glew` #-Wall -Werror -Wextra
+	CXXFLAGS = -Wall -Werror -Wextra -Ofast -D_REENTRANT `pkg-config --cflags glfw3` `pkg-config --cflags glew`
 	CPPFLAGS =
 endif
 

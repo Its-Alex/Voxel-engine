@@ -20,7 +20,7 @@ Input::~Input(void) {
 /* MEMBERS */
 
 void	Input::keyboardCallback(GLFWwindow* window, int key, int scancode, int action, int mods) {
-	(void*)window;
+	(void)window;
 	(void)scancode;
 	(void)mods;
 	this->_keyboardKeys[key] = action;
