@@ -52,7 +52,7 @@ else
 endif
 OBCC = 		$(addprefix $(ODIR),$(OBJS))
 
-all: dirs $(EXEC) $(DEPEND_FRAGMENT)
+all: dirs $(DEPEND_FRAGMENT) $(EXEC)
 
 -include $(DEPEND_FRAGMENT)
 
