@@ -1,12 +1,14 @@
 # Voxel-engine
 
-Voxel-engine is a project to create a voxel map. Some planets composed with cubes, where we can move.
+Voxel-engine is a project to create a voxel map. Some planets composed with
+cubes, where we can move.
 
 ## Dependencies
 
-- `glfw3`
-- `glew`
-- `pkg-config`
+- [`makedepend`](https://en.wikipedia.org/wiki/Makedepend)
+- [`pkg-config`](https://www.freedesktop.org/wiki/Software/pkg-config/)
+- [`glfw`](http://www.glfw.org/) (3)
+- [`glew`](http://glew.sourceforge.net/)
 
 ## Instruction
 
@@ -24,5 +26,6 @@ To clean build
 ```
 $ make fclean
 ```
+## License
 
-
+[MIT](https://en.wikipedia.org/wiki/Licence_MIT)
