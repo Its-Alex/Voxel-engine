@@ -15,28 +15,25 @@ EXEC = opengl
 export DEBUG = no
 CC = g++
 OS := $(shell uname -s)
+DEPEND_FRAGMENT = Make.depend
 MAKEFLAGS += --silent
-
-# Debug flags : -g -ggdb -fsanitize=address
 
 ifeq ($(DEBUG), yes)
 	CFLAGS =
-	CXXFLAGS = 	#-Wall -Werror -Wextra  -g -ggdb
+	CXXFLAGS = -g -ggdb `pkg-config --cflags glfw3` `pkg-config --cflags glew` #-Wall -Werror -Wextra
 	CPPFLAGS =
 else
 	CFLAGS =
-	CXXFLAGS = 	#-Wall -Werror -Wextra -Ofast -D_REENTRANT
+	CXXFLAGS = -Ofast -D_REENTRANT `pkg-config --cflags glfw3` `pkg-config --cflags glew` #-Wall -Werror -Wextra
 	CPPFLAGS =
 endif
 
-# Link lib : "-L FOLDER -lXXX" where XXX = libXXX.a
-
 ifeq ($(OS), Linux)
 	LFLAGS = 	`pkg-config --libs glfw3` `pkg-config --libs glew` -lGL -lm -lGLU
-	INCLUDE = 	-I./incs `pkg-config --libs glfw3` `pkg-config --libs glew`
+	INCLUDE = 	-I./incs
 else
 	LFLAGS = 	`pkg-config --libs glfw3` `pkg-config --libs glew` -framework OpenGL -lm
-	INCLUDE = 	-I./incs `pkg-config --libs glfw3` `pkg-config --libs glew`
+	INCLUDE = 	-I./incs
 endif
 
 OUT_DIR = 	objs
@@ -51,10 +48,14 @@ ODIR = 		./objs/
 OBJS = 		$(SRCS:.cpp=.o)
 OBCC = 		$(addprefix $(ODIR),$(OBJS))
 
-$(EXEC): directories $(OBCC)
+all: dirs $(EXEC) $(DEPEND_FRAGMENT)
+
+-include $(DEPEND_FRAGMENT)
+
+$(EXEC): $(OBCC)
 ifeq ($(OS), Linux)
 	@echo -e "\x1B[34m$(EXEC):\x1B[0m"
-	$(CC) $(CXXFLAGS) -o $@ $(OBCC) $(INCLUDE) $(LFLAGS)
+	@$(CC) $(CXXFLAGS) -o $@ $(OBCC) $(INCLUDE) $(LFLAGS)
 	@echo -e "\x1b[36m  + Compile program:\x1B[0m $@"
 else
 	@echo "\x1B[34m$(EXEC):\x1B[0m"
@@ -63,26 +64,21 @@ else
 endif
 
 $(ODIR)%.o: $(SDIR)%.cpp
-	@$(CC) $^ $(CXXFLAGS) -c -o $@ $(INCLUDE)
+	$(CC) $< $(CXXFLAGS) -c -o $@ $(INCLUDE)
 ifeq ($(OS), Linux)
-	@echo -e "\r\x1B[32m  + Compile:\x1B[0m $(notdir $^)"
+	@echo -e "\r\x1B[32m  + Compile:\x1B[0m $(notdir $<)"
 else
-	@echo "\r\x1B[32m  + Compile:\x1B[0m $(notdir $^)"
+	@echo "\r\x1B[32m  + Compile:\x1B[0m $(notdir $<)"
 endif
 
-directories: ${OUT_DIR} ${SRC_DIR} ${INC_DIR}
-
-${OUT_DIR}:
-	@mkdir -p ${OUT_DIR}
-
-${SRC_DIR}:
-	@mkdir -p ${SRC_DIR}
-
-${INC_DIR}:
-	@mkdir -p ${INC_DIR}
+$(DEPEND_FRAGMENT): $(SRCC)
+	@touch $(DEPEND_FRAGMENT)
+	@makedepend -f $(DEPEND_FRAGMENT) -- -Y -O -DHACK $(CFLAGS) $(CXXFLAGS) $(INCLUDE) -- $(SRCC) >& /dev/null
+	@sed 's/.\/srcs/.\/objs/g' $(DEPEND_FRAGMENT) > $(DEPEND_FRAGMENT).bak
+	@mv $(DEPEND_FRAGMENT).bak $(DEPEND_FRAGMENT)
 
 clean:
-	@rm -rf $(OUT_DIR)
+	@rm -rf $(DEPEND_FRAGMENT) $(OUT_DIR) 
 ifeq ($(OS), Linux)
 	@echo -e "\x1B[31m  - Remove:\x1B[0m objs"
 else
@@ -103,4 +99,15 @@ re: fclean
 run: all
 	@./$(EXEC)
 
-.PHONY: all clean fclean re run directories
+dirs: $(OUT_DIR) $(SRC_DIR) $(INC_DIR)
+
+$(OUT_DIR):
+	@mkdir -p $(OUT_DIR)
+
+$(SRC_DIR):
+	@mkdir -p $(SRC_DIR)
+
+$(INC_DIR):
+	@mkdir -p $(INC_DIR)
+
+.PHONY: all clean fclean re run dirs

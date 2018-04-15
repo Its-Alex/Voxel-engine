@@ -28,5 +28,6 @@
 *.out
 *.app
 
-opengl
+Make.depend
 .vscode
+opengl
