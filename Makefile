@@ -45,7 +45,11 @@ SRCS = 		$(shell ls srcs)
 SRCC = 		$(addprefix $(SDIR),$(SRCS))
 
 ODIR = 		./objs/
-OBJS = 		$(SRCS:.cpp=.o)
+ifeq ($(CC), gcc)
+	OBJS = 		$(SRCS:.c=.o)
+else
+	OBJS = 		$(SRCS:.cpp=.o)
+endif
 OBCC = 		$(addprefix $(ODIR),$(OBJS))
 
 all: dirs $(EXEC) $(DEPEND_FRAGMENT)
@@ -64,6 +68,14 @@ else
 endif
 
 $(ODIR)%.o: $(SDIR)%.cpp
+	$(CC) $< $(CXXFLAGS) -c -o $@ $(INCLUDE)
+ifeq ($(OS), Linux)
+	@echo -e "\r\x1B[32m  + Compile:\x1B[0m $(notdir $<)"
+else
+	@echo "\r\x1B[32m  + Compile:\x1B[0m $(notdir $<)"
+endif
+
+$(ODIR)%.o: $(SDIR)%.c
 	$(CC) $< $(CXXFLAGS) -c -o $@ $(INCLUDE)
 ifeq ($(OS), Linux)
 	@echo -e "\r\x1B[32m  + Compile:\x1B[0m $(notdir $<)"

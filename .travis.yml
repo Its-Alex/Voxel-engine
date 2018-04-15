@@ -2,27 +2,30 @@ language: cpp
 
 matrix:
   include:
-    - os: linux
-      dist: trusty
-      sudo: enable
+    # - os: linux
+    #   dist: trusty
+    #   sudo: enable
     - os: osx
       osx_image: xcode9.3
       sudo: enable
 
 compiler:
-  - gcc
+  # - gcc
   - clang
 
-addons:
-  apt:
-    sources:
-      - "deb http://ppa.launchpad.net/keithw/glfw3/ubuntu trusty main"
-      - "deb-src http://ppa.launchpad.net/keithw/glfw3/ubuntu trusty main"
-    packages:
-      - libglfw3-dev
-      - libglew-dev
-      - libglm-dev
-      - pkg-config
+# addons:
+#   apt:
+#     sources:
+#       - sourceline: "deb http://ppa.launchpad.net/keithw/glfw3/ubuntu trusty main"
+#       - sourceline: "deb-src http://ppa.launchpad.net/keithw/glfw3/ubuntu trusty main"
+#         key_url: 'https://gist.githubusercontent.com/Its-Alex/913f93691a8f0d0c2bca001a2528797a/raw/8023ed9e7ed89a8cecf342c37c85858da9b6083e/key'
+#     packages:
+#       - xi
+#       - libxrandr-dev
+#       - libglfw3-dev
+#       - libglew-dev
+#       - libglm-dev
+#       - pkg-config
 
 before_install:
   - if [[ $TRAVIS_OS_NAME == "osx" ]]; then brew update && brew bundle; fi
