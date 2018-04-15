@@ -1,9 +1,31 @@
 language: cpp
-sudo: enable
-os: osx
-osx_image: xcode9.3
+
+matrix:
+  include:
+    - os: linux
+      dist: trusty
+      sudo: enable
+    - os: osx
+      osx_image: xcode9.3
+      sudo: enable
+
+compiler:
+  - gcc
+  - clang
+
+addons:
+  apt:
+    sources:
+      - "deb http://ppa.launchpad.net/keithw/glfw3/ubuntu trusty main"
+      - "deb-src http://ppa.launchpad.net/keithw/glfw3/ubuntu trusty main"
+    packages:
+      - libglfw3-dev
+      - libglew-dev
+      - libglm-dev
+      - pkg-config
 
 before_install:
-  - brew update && brew bundle
+  - if [[ $TRAVIS_OS_NAME == "osx" ]]; then brew update && brew bundle; fi
+
 script:
   - make
