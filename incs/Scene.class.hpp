@@ -1,5 +1,7 @@
 #ifndef SCENE_CLASS_HPP
 # define SCENE_CLASS_HPP
+// Needed to use glm
+# define GLM_ENABLE_EXPERIMENTAL
 
 # include <stdio.h>
 # include <stdlib.h>

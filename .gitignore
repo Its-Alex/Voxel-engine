@@ -29,5 +29,4 @@
 *.app
 
 Make.depend
-.vscode
 opengl

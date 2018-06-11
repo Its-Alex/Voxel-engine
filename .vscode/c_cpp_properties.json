@@ -1,0 +1,35 @@
+{
+  "env": {
+    "myDefaultIncludePath": [
+      "${workspaceFolder}",
+      "${workspaceFolder}/incs"
+    ],
+    "myCompilerPath": "/usr/local/bin/gcc-7"
+  },
+  "configurations": [
+    {
+      "name": "Mac",
+      "browse": {
+        "path": [
+          "${workspaceFolder}"
+        ],
+        "limitSymbolsToIncludedHeaders": true
+      },
+      "includePath": [
+        "/usr/local/Cellar/glfw/3.2.1/include",
+        "/usr/local/Cellar/glew/2.1.0/include",
+        "/usr/local/Cellar/glm/0.9.9.0/include"
+      ],
+      "defines": [],
+      "macFrameworkPath": [
+          "/System/Library/Frameworks",
+          "/Library/Frameworks"
+      ],
+      "compilerPath": "/usr/bin/clang",
+      "cStandard": "c11",
+      "cppStandard": "c++17",
+      "intelliSenseMode": "clang-x64"
+    }
+  ],
+  "version": 4
+}
