@@ -3,16 +3,16 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: alex <alex@student.42.fr>                  +#+  +:+       +#+         #
+#    By: itsalex <itsalex@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/08/21 18:23:32 by malexand          #+#    #+#              #
-#    Updated: 2017/11/29 23:02:41 by alex             ###   ########.fr        #
+#    Updated: 2018/09/04 16:51:30 by itsalex          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 EXEC = opengl
 
-export DEBUG = no
+DEBUG ?= no
 CC = g++
 OS := $(shell uname -s)
 DEPEND_FRAGMENT = Make.depend
